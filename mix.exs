@@ -13,7 +13,7 @@ defmodule FakeHTTP.MixProject do
       name: "FakeHTTP",
       source_url: "https://github.com/ishikawa/ex_fake_http",
       docs: [
-        main: "README",
+        main: "readme",
         extras: ["README.md"]
       ]
     ]
