@@ -1,0 +1,114 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: circleci/elixir:1.7.3
+      environment:
+        MIX_ENV: test
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+
+      - restore_cache:
+
+          keys:
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}
+            - v1-mix-cache
+      - restore_cache:
+          keys:
+            - v1-build-cache-{{ .Branch }}
+            - v1-build-cache
+      - run: mix do deps.get, compile
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths:
+            - deps
+            - ~/.mix
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}
+          paths:
+            - deps
+            - ~/.mix
+      - save_cache:
+          key: v1-mix-cache
+          paths:
+            - deps
+            - ~/.mix
+      - save_cache:
+          key: v1-build-cache-{{ .Branch }}
+          paths:
+            - _build
+      - save_cache:
+          key: v1-build-cache
+          paths:
+            - _build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app
+            - .mix
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: mix test
+      - store_test_results:
+          path: _build/test/lib/ex_fake_http
+  check_formatted:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: mix format --check-formatted
+  dialyzer:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys:
+            - v1-plt-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-plt-cache-{{ .Branch }}
+            - v1-plt-cache
+      - run: mix dialyzer --plt
+      - save_cache:
+          key: v1-plt-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths:
+            - _build
+            - ~/.mix
+      - save_cache:
+          key: v1-plt-cache-{{ .Branch }}
+          paths:
+            - _build
+            - ~/.mix
+      - save_cache:
+          key: v1-plt-cache
+          paths:
+            - _build
+            - ~/.mix
+      - run:
+          command: mix dialyzer
+
+workflows:
+  version: 2
+  continuous_integration:
+    jobs:
+      - build
+      - check_formatted:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
+      - dialyzer:
+          requires:
+            - build
