@@ -5,7 +5,21 @@
 
 This library provides a scriptable HTTP server for testing HTTP based service (e.g. REST API). It makes easy to set up the server's resposens and test your code sends expected HTTP requests.
 
-## Server
+## Install
+
+To use FakeHTTP in your Mix projects, first add FakeHTTP as a dependency.
+
+```elixir
+def deps do
+  [
+    {:ex_fake_http, "~> 0.1.0", only: :test}
+  ]
+end
+```
+
+After adding FakeHTTP as a dependency, run `mix deps.get` to install it.
+
+## Usage
 
 The only public module in this library is `FakeHTTP.Server` module.
 
@@ -67,3 +81,7 @@ defmodule YourApp.YourModuleTest do
   end
 end
 ```
+
+## License
+
+MIT
