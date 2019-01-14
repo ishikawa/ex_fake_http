@@ -1,6 +1,7 @@
 # FakeHTTP
 
 [![CircleCI](https://circleci.com/gh/ishikawa/ex_fake_http.svg?style=shield)](https://circleci.com/gh/ishikawa/ex_fake_http)
+[![Hex pm](http://img.shields.io/hexpm/v/ex_fake_http.svg?style=flat)](https://hex.pm/packages/ex_fake_http)
 
 This library provides a scriptable HTTP server for testing HTTP based service (e.g. REST API). It makes easy to set up the server's resposens and test your code sends expected HTTP requests.
 
