@@ -15,6 +15,19 @@ defmodule FakeHTTP.ServerTest do
       assert server
       assert Process.alive?(server)
     end
+
+    test "given port number" do
+      # Take an available port
+      {:ok, socket} = :gen_tcp.listen(0, [:inet])
+      {:ok, port} = :inet.port(socket)
+
+      :ok = :gen_tcp.close(socket)
+
+      # Start a server
+      server = start_supervised!({Server, [port: port]})
+      assert base_url = Server.base_url(server)
+      assert base_url =~ ~r":#{port}"
+    end
   end
 
   describe "stop" do
