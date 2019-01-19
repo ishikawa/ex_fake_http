@@ -8,6 +8,8 @@ defmodule FakeHTTP.Server do
 
   defstruct [:supervisor, :registry_name, :unique_key]
 
+  ## Types
+
   @type server :: GenServer.server()
 
   @type options :: [GenServer.option()]
@@ -29,11 +31,24 @@ defmodule FakeHTTP.Server do
     |> Supervisor.child_spec(id: make_ref())
   end
 
+  @doc """
+  Starts a new `FakeHTTP.Server` process with the given `opts` options.
+
+  ## Options
+
+  - `port` - The port number of a HTTP server (default: `0`. It means the underlying OS will
+             assign an available port number)
+  - `name` - Register a started process (supervisor) with gicen `name`.
+  """
   @spec start_link(options) :: on_start
   def start_link(opts \\ []) do
     unique_key = make_ref()
 
-    with {:ok, server} <- Supervisor.start_link(__MODULE__, %{unique_key: unique_key}, opts) do
+    {http_service_opts, sup_opts} = Keyword.split(opts, [:port])
+    init_args = {%{unique_key: unique_key}, http_service_opts}
+    sup_opts = Keyword.put(sup_opts, :strategy, :one_for_one)
+
+    with {:ok, server} <- Supervisor.start_link(__MODULE__, init_args, sup_opts) do
       case Server.Registry.register_unique_key(server, unique_key) do
         {:ok, _owner} ->
           {:ok, server}
@@ -131,13 +146,14 @@ defmodule FakeHTTP.Server do
   # Callbacks
 
   @impl true
-  def init(%{unique_key: unique_key} = args) do
+  def init({%{unique_key: unique_key} = args, http_service_opts}) do
     agent_name = Server.Registry.agent_name(unique_key)
     http_service_name = Server.Registry.http_service_name(unique_key)
+    http_service_opts = Keyword.put(http_service_opts, :name, http_service_name)
 
     children = [
       {Server.Agent, name: agent_name},
-      {Server.HTTPService, [args, [name: http_service_name]]}
+      {Server.HTTPService, [args, http_service_opts]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

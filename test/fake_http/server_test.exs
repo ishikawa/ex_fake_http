@@ -17,13 +17,16 @@ defmodule FakeHTTP.ServerTest do
     end
 
     test "given port number" do
+      # Take an available port
       {:ok, socket} = :gen_tcp.listen(0, [:inet])
-      {:ok, port} = :inet.port(socket) |> IO.inspect
+      {:ok, port} = :inet.port(socket)
 
       :ok = :gen_tcp.close(socket)
-      Process.sleep(100)
 
-      start_supervised!(Server, port: port)
+      # Start a server
+      server = start_supervised!({Server, [port: port]})
+      assert base_url = Server.base_url(server)
+      assert base_url =~ ~r":#{port}"
     end
   end
 
