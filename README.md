@@ -12,7 +12,7 @@ To use FakeHTTP in your Mix projects, first add FakeHTTP as a dependency.
 ```elixir
 def deps do
   [
-    {:ex_fake_http, "~> 0.1.0", only: :test}
+    {:ex_fake_http, "~> 0.2.0", only: :test}
   ]
 end
 ```
