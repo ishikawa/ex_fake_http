@@ -22,6 +22,13 @@ defmodule FakeHTTP.Server do
 
   @type headers :: [{binary, binary}] | %{binary => binary}
 
+  def child_spec(init_arg) do
+    # Because multiple server processes are required for the same test,
+    # we override the default `id` with a reference.
+    super(init_arg)
+    |> Supervisor.child_spec(id: make_ref())
+  end
+
   @spec start_link(options) :: on_start
   def start_link(opts \\ []) do
     unique_key = make_ref()
