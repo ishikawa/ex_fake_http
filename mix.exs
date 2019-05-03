@@ -40,6 +40,8 @@ defmodule FakeHTTP.MixProject do
       {:jason, "~> 1.1.2"},
       {:ace, "~> 0.18.1"},
       {:raxx, "~> 0.17.0"},
+      {:raxx_logger, "~> 0.1.0"},
+      {:raxx_view, "~> 0.1.0"},
       {:httpoison, "~> 1.5", only: :test},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false}
