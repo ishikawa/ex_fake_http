@@ -197,7 +197,7 @@ defmodule FakeHTTP.Server do
   end
 
   defp set_body(response, json_map) when is_map(json_map) do
-    with {:ok, body} <- Jason.encode(json_map) do
+    with {:ok, body} <- FakeHTTP.json_library().encode(json_map) do
       set_default_content_type(response, "application/json")
       |> Raxx.set_body(body)
     end

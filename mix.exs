@@ -37,7 +37,7 @@ defmodule FakeHTTP.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:jason, "~> 1.1.2"},
+      {:poison, ">= 3.0.0", optional: true},
       {:ace, "~> 0.18.1"},
       {:raxx, "~> 0.17.0"},
       {:raxx_logger, "~> 0.1.0"},

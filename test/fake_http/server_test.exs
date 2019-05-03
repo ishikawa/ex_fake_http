@@ -50,7 +50,7 @@ defmodule FakeHTTP.ServerTest do
       assert {:ok, response} = Server.Agent.dequeue_response(agent)
       assert response.status == 400
       assert :proplists.get_value("content-type", response.headers) == "application/json"
-      assert Jason.decode!(response.body) == %{"error" => "bad_request"}
+      assert FakeHTTP.json_library().decode!(response.body) == %{"error" => "bad_request"}
     end
   end
 end

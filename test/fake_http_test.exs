@@ -24,7 +24,7 @@ defmodule FakeHTTPTest do
 
       assert response.status_code == 200
       assert :proplists.get_value("content-type", response.headers) == "application/json"
-      assert Jason.decode!(response.body) == %{"message" => "hello"}
+      assert FakeHTTP.json_library().decode!(response.body) == %{"message" => "hello"}
 
       # Verify that the expected requests were made.
       {:ok, req} = FakeHTTP.Server.take(server)
