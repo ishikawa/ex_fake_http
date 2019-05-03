@@ -6,7 +6,7 @@ defmodule FakeHTTP.MixProject do
       app: :ex_fake_http,
       version: "0.2.0",
       description: "A scriptable HTTP server for testing",
-      elixir: "~> 1.7",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
@@ -40,6 +40,8 @@ defmodule FakeHTTP.MixProject do
       {:jason, "~> 1.1.2"},
       {:ace, "~> 0.18.1"},
       {:raxx, "~> 0.17.0"},
+      {:raxx_logger, "~> 0.1.0"},
+      {:raxx_view, "~> 0.1.0"},
       {:httpoison, "~> 1.5", only: :test},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false}
