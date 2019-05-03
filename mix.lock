@@ -18,6 +18,7 @@
   "mimerl": {:hex, :mimerl, "1.2.0", "67e2d3f571088d5cfd3e550c383094b47159f3eee8ffa08e64106cdf5e981be3", [:rebar3], [], "hexpm"},
   "nimble_parsec": {:hex, :nimble_parsec, "0.5.0", "90e2eca3d0266e5c53f8fbe0079694740b9c91b6747f2b7e3c5d21966bba8300", [:mix], [], "hexpm"},
   "parse_trans": {:hex, :parse_trans, "3.3.0", "09765507a3c7590a784615cfd421d101aec25098d50b89d7aa1d66646bc571c1", [:rebar3], [], "hexpm"},
+  "poison": {:hex, :poison, "4.0.1", "bcb755a16fac91cad79bfe9fc3585bb07b9331e50cfe3420a24bcc2d735709ae", [:mix], [], "hexpm"},
   "raxx": {:hex, :raxx, "0.17.6", "74f5fde4d7b14e3e605a10f37931ef9d7852b059fa77ba96af1fb881e3eb2201", [:mix], [{:cookie, "~> 0.1.0", [hex: :cookie, repo: "hexpm", optional: false]}, {:eex_html, "~> 0.1.1 or ~> 0.2.0", [hex: :eex_html, repo: "hexpm", optional: false]}], "hexpm"},
   "raxx_logger": {:hex, :raxx_logger, "0.1.0", "75a5c8e8f929bfbcb006fca7d3433ff9e09a1382fc5e01d7baca945e4d95a809", [:mix], [{:raxx, "~> 0.17.5", [hex: :raxx, repo: "hexpm", optional: false]}], "hexpm"},
   "raxx_view": {:hex, :raxx_view, "0.1.7", "8e7edeafaa3d59743f24ac7684852040e9634b9882dcd6d17b5e1e926b4ed729", [:mix], [{:eex_html, "~> 0.2.1 or ~> 1.0", [hex: :eex_html, repo: "hexpm", optional: false]}, {:raxx, "~> 0.17.6 or ~> 0.18.0 or ~> 1.0", [hex: :raxx, repo: "hexpm", optional: false]}], "hexpm"},
