@@ -1,4 +1,4 @@
-defmodule FakeHTTP.Application do
+defmodule FakeHTTP do
   @moduledoc false
 
   use Application
