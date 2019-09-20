@@ -39,8 +39,8 @@ defmodule FakeHTTP.MixProject do
     [
       {:poison, ">= 3.0.0", optional: true},
       {:ace, "~> 0.18.1"},
-      {:raxx, "~> 0.17.0"},
-      {:raxx_logger, "~> 0.1.0"},
+      {:raxx, "~> 1.1.0"},
+      {:raxx_logger, "~> 0.2.0"},
       {:raxx_view, "~> 0.1.0"},
       {:httpoison, "~> 1.5", only: :test},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},

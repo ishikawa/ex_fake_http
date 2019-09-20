@@ -34,6 +34,16 @@ defmodule FakeHTTPTest do
       assert req.headers["authorization"] == auth_header
     end
 
+    test "scheme, authority", %{server: server, base_url: base_url} do
+      FakeHTTP.Server.enqueue(server, %{message: "hello"})
+      assert {:ok, _response} = HTTPoison.get("#{base_url}/hello")
+
+      {:ok, req} = FakeHTTP.Server.take(server)
+
+      assert req.scheme == :http
+      assert "#{req.scheme}://#{req.host}:#{req.port}" == base_url
+    end
+
     test "given status_code integer value", %{server: server, base_url: base_url} do
       FakeHTTP.Server.enqueue(server, 200)
       assert {:ok, response} = HTTPoison.get(base_url)
