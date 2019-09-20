@@ -4,7 +4,7 @@ defmodule FakeHTTP.MixProject do
   def project do
     [
       app: :ex_fake_http,
-      version: "0.3.0",
+      version: "0.3.1",
       description: "A scriptable HTTP server for testing",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
