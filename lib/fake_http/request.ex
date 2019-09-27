@@ -56,7 +56,7 @@ defmodule FakeHTTP.Request do
       method: Map.fetch!(@raxx_methods, request.method),
       host: Raxx.Request.host(request),
       port: Raxx.Request.port(request),
-      request_path: Raxx.normalized_path(request),
+      request_path: request.raw_path,
       headers: Map.new(request.headers),
       body: request.body
     }
