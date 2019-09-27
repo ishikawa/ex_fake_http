@@ -44,6 +44,22 @@ defmodule FakeHTTPTest do
       assert "#{req.scheme}://#{req.host}:#{req.port}" == base_url
     end
 
+    test "trailing slash", %{server: server, base_url: base_url} do
+      FakeHTTP.Server.enqueue(server, %{message: "hello"})
+      assert {:ok, _response} = HTTPoison.get("#{base_url}/hello/")
+
+      {:ok, req} = FakeHTTP.Server.take(server)
+      assert req.request_path == "/hello/"
+    end
+
+    test "query string", %{server: server, base_url: base_url} do
+      FakeHTTP.Server.enqueue(server, %{message: "hello"})
+      assert {:ok, _response} = HTTPoison.get("#{base_url}/hello?foo=bar")
+
+      {:ok, req} = FakeHTTP.Server.take(server)
+      assert req.query_string == "foo=bar"
+    end
+
     test "given status_code integer value", %{server: server, base_url: base_url} do
       FakeHTTP.Server.enqueue(server, 200)
       assert {:ok, response} = HTTPoison.get(base_url)
