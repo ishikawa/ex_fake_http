@@ -11,6 +11,7 @@ defmodule FakeHTTP.Request do
   * `request_path` - the requested path, example: `/path/to/index.html`
   * `headers` - the request headers as a map
   * `body` - the request body
+  * `query_string` - the request query string as a binary, example: `"foo=bar"`
   """
   defstruct scheme: :http,
             method: :get,
@@ -18,7 +19,8 @@ defmodule FakeHTTP.Request do
             port: 80,
             request_path: "/",
             headers: %{},
-            body: ""
+            body: "",
+            query_string: nil
 
   @type scheme :: atom
 
@@ -35,7 +37,8 @@ defmodule FakeHTTP.Request do
           port: integer,
           request_path: binary,
           headers: headers,
-          body: body
+          body: body,
+          query_string: binary | nil
         }
 
   @raxx_methods %{
@@ -58,7 +61,8 @@ defmodule FakeHTTP.Request do
       port: Raxx.Request.port(request),
       request_path: request.raw_path,
       headers: Map.new(request.headers),
-      body: request.body
+      body: request.body,
+      query_string: request.query
     }
   end
 end
