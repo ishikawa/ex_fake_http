@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.3.2
+
+- Use `Raxx.Request.raw_path` to get request path. Trailing slash in a path is always preserved.
+- Add `query_string` to `FakeHTTP.Request`
+
 ## 0.3.1
 
-- Added some information to `FakeHTTP.Request` (#8)
+- Added some information to `FakeHTTP.Request`
 
 ## 0.3.0
 
