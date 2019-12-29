@@ -161,7 +161,13 @@ defmodule FakeHTTP.Server do
 
   ## Private
 
-  @spec build_response(Raxx.Response.t() | body | status_code | {status_code, body}) ::
+  @spec build_response(
+          Raxx.Response.t()
+          | body
+          | status_code
+          | {status_code, body}
+          | {status_code, body, headers}
+        ) ::
           {:ok, Raxx.Response.t()} | {:error, reason :: term}
   defp build_response(%Raxx.Response{} = response) do
     {:ok, response}
