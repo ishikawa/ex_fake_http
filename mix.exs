@@ -38,7 +38,8 @@ defmodule FakeHTTP.MixProject do
   defp deps do
     [
       {:poison, ">= 3.0.0", optional: true},
-      {:ace, "~> 0.18.1"},
+      # {:ace, "~> 0.18.1"},
+      {:ace, github: "ishikawa/Ace", branch: "work/fix-and-add-function-spec"},
       {:raxx, "~> 1.1.0"},
       {:raxx_logger, "~> 0.2.0"},
       {:raxx_view, "~> 0.1.0"},
