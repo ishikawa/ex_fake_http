@@ -12,6 +12,7 @@ defmodule FakeHTTP.MixProject do
       package: package(),
       name: "FakeHTTP",
       source_url: "https://github.com/ishikawa/ex_fake_http",
+      dialyzer: [ignore_warnings: ".dialyzer_ignore.exs"],
       docs: [
         main: "readme",
         extras: ["README.md"]
@@ -38,7 +39,9 @@ defmodule FakeHTTP.MixProject do
   defp deps do
     [
       {:poison, ">= 3.0.0", optional: true},
-      {:ace, "~> 0.18.1"},
+      # {:ace, "~> 0.18.1"},
+      # {:ace, path: "../Ace"},
+      {:ace, github: "ishikawa/Ace", ref: "ee43e18409f4d68f72eee852e6041bc239ef43ef"},
       {:raxx, "~> 1.1.0"},
       {:raxx_logger, "~> 0.2.0"},
       {:raxx_view, "~> 0.1.0"},
