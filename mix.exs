@@ -41,7 +41,7 @@ defmodule FakeHTTP.MixProject do
       {:poison, ">= 3.0.0", optional: true},
       # {:ace, "~> 0.18.1"},
       # {:ace, path: "../Ace"},
-      {:ace, github: "ishikawa/Ace", branch: "work/fix-and-add-function-spec"},
+      {:ace, github: "ishikawa/Ace", ref: "ee43e18409f4d68f72eee852e6041bc239ef43ef"},
       {:raxx, "~> 1.1.0"},
       {:raxx_logger, "~> 0.2.0"},
       {:raxx_view, "~> 0.1.0"},
